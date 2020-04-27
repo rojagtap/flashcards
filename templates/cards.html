@@ -1,5 +1,9 @@
 <h1>Card</h1>
-{{ flashcard }}
+
+<h3><b>{{ word }}</b></h3>
+<h4>{{ meaning }}</h4>
+<h6>{{ category }}</h6>
+
 <form method="post">
     <button type="submit" name="knew_it" value="{{ idx }}">Knew It</button>
 </form>

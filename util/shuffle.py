@@ -12,14 +12,14 @@ class FlashCards:
 
     def set_defaults(self, file):
         self.file = file
-        self.df = pd.read_csv(file)
+        self.df = pd.read_csv(file, sep=':')
         self.df['probabilities'] = np.array([1 / len(self.df)] * len(self.df))
         self.df['category'] = new
         self.df['count'] = -1
 
     def generate(self):
         idx = np.random.choice(self.df.index, p=self.df["probabilities"])
-        print(self.df.head())
+        print(self.df.loc[idx, :])
         return idx, self.df.loc[idx, :]
 
     def update_prob(self):
@@ -37,7 +37,6 @@ class FlashCards:
                 key]
 
     def shuffle(self, choice, idx):
-        print(choice)
         if choice == choices['no_clue']:
             self.df.loc[idx, self.category] = learning
             self.update_prob()

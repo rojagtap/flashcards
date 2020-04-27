@@ -25,23 +25,24 @@ def index():
                 file.save(path)
                 model.set_defaults(path)
                 idx, flashcard = model.generate()
-                return render_template("cards.html", flashcard=flashcard.head(), idx=idx)
+                word, meaning, category = flashcard["word"], flashcard["meaning"], flashcard["category"]
+                return render_template("cards.html", word=word, meaning=meaning, category=category, idx=idx)
             except:
                 errors = "Haggu"
                 return render_template("index.html", errors=errors)
         else:
             if request.form.get('knew_it'):
-                print("here")
                 choice = choices['knew_it']
                 idx = request.form.get("knew_it")
                 idx, flashcard = model.shuffle(choice, int(idx))
-                return render_template("cards.html", flashcard=flashcard.head(), idx=idx)
+                word, meaning, category = flashcard["word"], flashcard["meaning"], flashcard["category"]
+                return render_template("cards.html", word=word, meaning=meaning, category=category, idx=idx)
             elif request.form.get('no_clue'):
-                print("no here")
                 choice = choices['no_clue']
                 idx = request.form.get("no_clue")
                 idx, flashcard = model.shuffle(choice, int(idx))
-                return render_template("cards.html", flashcard=flashcard.head(), idx=idx)
+                word, meaning, category = flashcard["word"], flashcard["meaning"], flashcard["category"]
+                return render_template("cards.html", word=word, meaning=meaning, category=category, idx=idx)
     return render_template("index.html")
 
 
