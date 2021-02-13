@@ -11,19 +11,17 @@ Python version 3.7.6
 
 
 ### csv format
-'''
-word:meaning:example
-testword0:testmeaning0:testexample0
-testword1:testmeaning1:testexample1
-testword2:testmeaning2:                       # in case there is no example sentence
-.
-.
-'''
+
+    word:meaning:example
+    testword0:testmeaning0:testexample0
+    testword1:testmeaning1:testexample1
+    testword2:testmeaning2:                       # in case there is no example sentence
+    ...
+
 
 ### json format
-'''
-{
-  "word0": {"meanings": ["meaning0", "meaning1", ...]},
-  "word1": {"meanings": ["meaning0", "meaning1", ...]}, ...
-}
-'''
+
+    {
+      "word0": {"meanings": ["meaning0", "meaning1", ...]},
+      "word1": {"meanings": ["meaning0", "meaning1", ...]}, ...
+    }
