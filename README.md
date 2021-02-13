@@ -9,3 +9,21 @@ Python version 3.7.6
    and save as csv
  - run app using `python main.py -m Flask` to start the app and use on [http://localhost:5000](http://localhost:5000)
 
+
+### csv format
+'''
+word:meaning:example
+testword0:testmeaning0:testexample0
+testword1:testmeaning1:testexample1
+testword2:testmeaning2:                       # in case there is no example sentence
+.
+.
+'''
+
+### json format
+'''
+{
+  "word0": {"meanings": ["meaning0", "meaning1", ...]},
+  "word1": {"meanings": ["meaning0", "meaning1", ...]}, ...
+}
+'''
