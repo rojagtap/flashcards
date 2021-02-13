@@ -21,6 +21,8 @@ def index():
                 errors = "File Not Found"
                 return render_template("index.html", errors=errors)
             try:
+                if not(os.path.isdir(app.config['UPLOAD_FOLDER'])):
+                    os.mkdir(app.config['UPLOAD_FOLDER'])
                 path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
                 file.save(path)
                 model.set_defaults(path)

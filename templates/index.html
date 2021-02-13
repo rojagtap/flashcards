@@ -1,7 +1,7 @@
 <h1>Upload File</h1>
 
 <form enctype="multipart/form-data" method="post">
-    <input type="file" accept="text/csv" name="file">
+    <input type="file" accept=".csv,.json" name="file">
     <button type="submit">Submit</button>
     {% if errors %}
         {{ errors }}

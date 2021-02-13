@@ -1,18 +1,28 @@
+import json
 import pandas as pd
 import numpy as np
 from util.constants import *
 
 
 class FlashCards:
-
     def __init__(self):
-        self.file = None
         self.df = None
         self.category = "category"
 
+    def read_file(self, file):
+        if file.endswith("json"):
+            data = json.load(open(file))
+            words = list(data.keys())
+            meanings = ["<br/>".join(value["meanings"]) for value in data.values()]
+            self.df = pd.DataFrame(zip(words, meanings), columns=["word", "meaning"])
+        elif file.endswith("csv"):
+            self.df = pd.read_csv(file, sep=':')
+        else:
+            raise Exception("Unsupported File Format")
+
+
     def set_defaults(self, file):
-        self.file = file
-        self.df = pd.read_csv(file, sep=':')
+        self.read_file(file)
         self.df['probabilities'] = np.array([1 / len(self.df)] * len(self.df))
         self.df['category'] = new
         self.df['count'] = -1
@@ -33,8 +43,7 @@ class FlashCards:
         addition = (1 - addition) / self.df['category'].nunique()
         prob = {key: (value + addition) for key, value in prob.items()}
         for key in keys:
-            self.df.loc[self.df["category"] == key, "probabilities"] = prob[key] / self.df["category"].value_counts()[
-                key]
+            self.df.loc[self.df["category"] == key, "probabilities"] = prob[key] / self.df["category"].value_counts()[key]
 
     def shuffle(self, choice, idx):
         if choice == choices['no_clue']:

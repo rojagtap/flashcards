@@ -1,8 +1,10 @@
 <h1>Card</h1>
 
-<h3><b>{{ word }}</b></h3>
-<h4>{{ meaning }}</h4>
-<h6>{{ category }}</h6>
+{% autoescape false %}
+    <h3><b>{{ word }}</b></h3>
+    <h4>{{ meaning }}</h4>
+    <h6>{{ category }}</h6>
+{% endautoescape %}
 
 <form method="post">
     <button type="submit" name="knew_it" value="{{ idx }}">Knew It</button>
