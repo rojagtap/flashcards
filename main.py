@@ -18,7 +18,7 @@ def index():
         if "file" in request.files:
             file = request.files['file']
             if file.filename == '':
-                errors = "Empty File BC"
+                errors = "File Not Found"
                 return render_template("index.html", errors=errors)
             try:
                 path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
@@ -27,8 +27,8 @@ def index():
                 idx, flashcard = model.generate()
                 word, meaning, category = flashcard["word"], flashcard["meaning"], flashcard["category"]
                 return render_template("cards.html", word=word, meaning=meaning, category=category, idx=idx)
-            except:
-                errors = "Haggu"
+            except Exception as ex:
+                errors = ex
                 return render_template("index.html", errors=errors)
         else:
             if request.form.get('knew_it'):
