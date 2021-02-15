@@ -1,14 +1,60 @@
-<h1>Card</h1>
-
-{% autoescape false %}
-    <h3><b>{{ word }}</b></h3>
-    <h4>{{ meaning }}</h4>
-    <h6>{{ category }}</h6>
-{% endautoescape %}
-
-<form method="post">
-    <button type="submit" name="knew_it" value="{{ idx }}">Knew It</button>
-</form>
-<form method="post">
-    <button type="submit" name="no_clue" value="{{ idx }}">No Clue</button>
-</form>
+{% extends "base.html" %}
+{% block title %}Flashcards{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="accordion my-5" id="accordionExample">
+        <div class="card">
+            <div class="card-header collapsed d-flex p-5" id="headingTwo" data-toggle="collapse"
+                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class="container">
+                    <div class="row">
+                        <h4 class="ml-auto"><span class="badge badge-{{ category }} text-light">{{ category }}</span>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <h1 class="mx-auto"><b>{{ word }}</b></h5>
+                    </div>
+                </div>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="card-body">
+                        <div class="container">
+                            {% autoescape false %}
+                            <h4>{{ meaning }}</h4>
+                            {% if example %}
+                            <h5>{{ example }}</h5>
+                            {% endif %}
+                            {% endautoescape %}
+                            <form method="post" class="form form-horizontal">
+                                <div class="btn-group d-flex">
+                                    <button class="btn btn-success w-100 mt-5" type="submit" name="knew_it"
+                                        value="{{ idx }}">I knew
+                                        this word</button>
+                                    <button class="btn btn-danger w-100 mt-5" type="submit" name="no_clue"
+                                        value="{{ idx }}">I
+                                        didn't know this word</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="progress mt-3">
+        <div class="progress-bar bg-success" role="progressbar" style="width: {{ mastered }}%" aria-valuenow="" aria-valuemin="0"
+            aria-valuemax="{{ total }}"></div>
+    </div>
+    <div class="progress mt-3">
+        <div class="progress-bar bg-warning" role="progressbar" style="width: {{ reviewing }}%" aria-valuenow="" aria-valuemin="0"
+            aria-valuemax="{{ total }}"></div>
+    </div>
+    <div class="progress mt-3">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ learning }}%" aria-valuenow="" aria-valuemin="0"
+            aria-valuemax="{{ total }}"></div>
+    </div>
+</div>
+{% endblock %}

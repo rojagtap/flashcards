@@ -15,6 +15,7 @@ class FlashCards:
             words = list(data.keys())
             meanings = ["<br/>".join(value["meanings"]) for value in data.values()]
             self.df = pd.DataFrame(zip(words, meanings), columns=["word", "meaning"])
+            self.df['example'] = None
         elif file.endswith("csv"):
             self.df = pd.read_csv(file, sep=':')
         else:
@@ -30,7 +31,8 @@ class FlashCards:
     def generate(self):
         idx = np.random.choice(self.df.index, p=self.df["probabilities"])
         print(self.df.loc[idx, :])
-        return idx, self.df.loc[idx, :]
+        value_counts = self.df["category"].value_counts()
+        return idx, self.df.loc[idx, :], self.df.shape[0], value_counts.get(mastered, 0) * 100 / self.df.shape[0], value_counts.get(learning, 0) * 100 / self.df.shape[0], value_counts.get(reviewing, 0) * 100 / self.df.shape[0]
 
     def update_prob(self):
         prob = dict()
