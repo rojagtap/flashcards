@@ -26,12 +26,12 @@
                             <h5>{{ example }}</h5>
                             {% endif %}
                             {% endautoescape %}
-                            <form method="post" class="form form-horizontal">
-                                <div class="btn-group d-flex">
-                                    <button class="btn btn-success w-100 mt-5" type="submit" name="knew_it"
+                            <form method="post" class="form form-horizontal mt-5">
+                                <div class="btn-group-vertical d-flex">
+                                    <button class="btn btn-success" type="submit" name="knew_it"
                                         value="{{ idx }}">I knew
                                         this word</button>
-                                    <button class="btn btn-danger w-100 mt-5" type="submit" name="no_clue"
+                                    <button class="btn btn-danger mt-1" type="submit" name="no_clue"
                                         value="{{ idx }}">I
                                         didn't know this word</button>
                                 </div>
