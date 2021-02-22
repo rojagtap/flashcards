@@ -14,8 +14,8 @@ class FlashCards:
             data = json.load(open(file))
             words = list(data.keys())
             meanings = ["<br/>".join(value["meanings"]) for value in data.values()]
-            self.df = pd.DataFrame(zip(words, meanings), columns=["word", "meaning"])
-            self.df['example'] = None
+            examples = [value.get("example") for value in data.values()]
+            self.df = pd.DataFrame(zip(words, meanings, examples), columns=["word", "meaning", "example"])
         elif file.endswith("csv"):
             self.df = pd.read_csv(file, sep=':')
         else:
@@ -32,7 +32,10 @@ class FlashCards:
         idx = np.random.choice(self.df.index, p=self.df["probabilities"])
         print(self.df.loc[idx, :])
         value_counts = self.df["category"].value_counts()
-        return idx, self.df.loc[idx, :], self.df.shape[0], value_counts.get(mastered, 0) * 100 / self.df.shape[0], value_counts.get(learning, 0) * 100 / self.df.shape[0], value_counts.get(reviewing, 0) * 100 / self.df.shape[0]
+        mastered_count = value_counts.get(mastered, 0)
+        learning_count = value_counts.get(learning, 0)
+        reviewing_count = value_counts.get(reviewing, 0)
+        return idx, self.df.loc[idx, :], self.df.shape[0], mastered_count * 100 / self.df.shape[0], learning_count * 100 / self.df.shape[0], reviewing_count * 100 / self.df.shape[0], mastered_count, learning_count, reviewing_count
 
     def update_prob(self):
         prob = dict()
