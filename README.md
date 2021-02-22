@@ -22,6 +22,6 @@ Python version 3.7.6
 ### json format
 
     {
-      "word0": {"meanings": ["meaning0", "meaning1", ...]},
+      "word0": {"meanings": ["meaning0", "meaning1", ...], "example": "example sentence"},
       "word1": {"meanings": ["meaning0", "meaning1", ...]}, ...
     }
