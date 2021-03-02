@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import os
+import os, shutil
 from util.constants import choices
 from util.shuffle import FlashCards
 
@@ -54,4 +54,5 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
+    shutil.rmtree(UPLOAD_PATH)
