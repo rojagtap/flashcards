@@ -3,4 +3,4 @@ new = "new"
 learning = "learning"
 reviewing = "reviewing"
 mastered = "mastered"
-categories = {new: 0.2, learning: 0.4, reviewing: 0.3, mastered: 0.1}
+categories = {new: 0.8, learning: 0.1, reviewing: 0.09, mastered: 0.01}
